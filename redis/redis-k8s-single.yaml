@@ -35,11 +35,11 @@ spec:
             name: config
       volumes:
         - name: config
-          configMap:
+          configMap: # configMap 会挂在 /usr/local/etc/redis/redis.conf 上。与 mountPath 和 configMap 下的 path 一同指定
             name: redis-config
             items:
-              - key: redis-config
-                path: redis.conf
+              - key: redis.conf
+                path: redis/redis.conf
 ---
 apiVersion: v1
 kind: Service        # Type of Kubernetes resource
