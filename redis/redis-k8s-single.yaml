@@ -23,13 +23,23 @@ spec:
       - name: master
         image: redis:6.0.6-alpine
         command: [ "/usr/local/bin/redis-server" ]
-        args: [ "/redis-conf/redis.conf" ]
+        args: [ "/redis/redis.conf" ]
         resources:
           requests:
             cpu: 256m
             memory: 256Mi
         ports:
         - containerPort: 6379
+        volumeMounts:
+          - mountPath: /redis
+            name: config
+      volumes:
+        - name: config
+          configMap:
+            name: redis-config
+            items:
+              - key: redis-config
+                path: redis.conf
 ---
 apiVersion: v1
 kind: Service        # Type of Kubernetes resource
