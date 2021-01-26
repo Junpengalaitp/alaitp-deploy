@@ -22,8 +22,8 @@ spec:
       containers:
       - name: master
         image: redis:6.0.6-alpine
-        command: "redis-server"
-        args: "/usr/local/etc/redis/redis.conf"
+        command: ["redis-server"]
+        args: ["/usr/local/etc/redis/redis.conf"]
         resources:
           requests:
             cpu: 256m
